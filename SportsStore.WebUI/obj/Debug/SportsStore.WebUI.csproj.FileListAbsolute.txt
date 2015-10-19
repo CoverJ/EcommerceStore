@@ -1,6 +1,8 @@
 C:\Users\John\Documents\Programming\OnlineStoreMVC\SportsStore\SportsStore.WebUI\bin\SportsStore.WebUI.dll.config
 C:\Users\John\Documents\Programming\OnlineStoreMVC\SportsStore\SportsStore.WebUI\bin\SportsStore.WebUI.dll
 C:\Users\John\Documents\Programming\OnlineStoreMVC\SportsStore\SportsStore.WebUI\bin\SportsStore.WebUI.pdb
+C:\Users\John\Documents\Programming\OnlineStoreMVC\SportsStore\SportsStore.WebUI\bin\EntityFramework.dll
+C:\Users\John\Documents\Programming\OnlineStoreMVC\SportsStore\SportsStore.WebUI\bin\EntityFramework.SqlServer.dll
 C:\Users\John\Documents\Programming\OnlineStoreMVC\SportsStore\SportsStore.WebUI\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\John\Documents\Programming\OnlineStoreMVC\SportsStore\SportsStore.WebUI\bin\Moq.dll
 C:\Users\John\Documents\Programming\OnlineStoreMVC\SportsStore\SportsStore.WebUI\bin\Ninject.dll
@@ -15,6 +17,8 @@ C:\Users\John\Documents\Programming\OnlineStoreMVC\SportsStore\SportsStore.WebUI
 C:\Users\John\Documents\Programming\OnlineStoreMVC\SportsStore\SportsStore.WebUI\bin\System.Web.Webpages.Razor.dll
 C:\Users\John\Documents\Programming\OnlineStoreMVC\SportsStore\SportsStore.WebUI\bin\WebActivator.dll
 C:\Users\John\Documents\Programming\OnlineStoreMVC\SportsStore\SportsStore.WebUI\bin\SportsStore.Domain.pdb
+C:\Users\John\Documents\Programming\OnlineStoreMVC\SportsStore\SportsStore.WebUI\bin\EntityFramework.xml
+C:\Users\John\Documents\Programming\OnlineStoreMVC\SportsStore\SportsStore.WebUI\bin\EntityFramework.SqlServer.xml
 C:\Users\John\Documents\Programming\OnlineStoreMVC\SportsStore\SportsStore.WebUI\bin\Moq.xml
 C:\Users\John\Documents\Programming\OnlineStoreMVC\SportsStore\SportsStore.WebUI\bin\Ninject.pdb
 C:\Users\John\Documents\Programming\OnlineStoreMVC\SportsStore\SportsStore.WebUI\bin\Ninject.xml
