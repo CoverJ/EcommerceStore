@@ -2,68 +2,68 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using SportsStore.Domain.Abstract;
+using SportsStore.Domain.Entities;
+using SportsStore.WebUI.Controllers;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace SportsStore.UnitTests
 {
-    /// <summary>
-    /// Summary description for ImageTests
-    /// </summary>
     [TestClass]
     public class ImageTests
     {
-        public ImageTests()
+        [TestMethod]
+        public void Can_Retrieve_Image_Data()
         {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
+            // Arrange - create a product with image data
+            Product prod = new Product
             {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
+                ProductID = 2,
+                Name = "Test",
+                ImageData = new byte[] { },
+                ImageMimeType = "image/png"
+            };
 
-        #region Additional test attributes
-        //
-        // You can use the following additional attributes as you write your tests:
-        //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
-        #endregion
+            // Arrange - create a mock repository
+            Mock<IProductRepository> mock = new Mock<IProductRepository>();
+            mock.Setup(m => m.Products).Returns(new Product[] {
+                new Product {ProductID = 1, Name = "P1"},
+                prod,
+                new Product {ProductID = 3, Name = "P2"}
+            }.AsQueryable());
+
+            // Arrange - create the controller
+            ProductController target = new ProductController(mock.Object);
+
+            // Act - call the GetImage method
+            ActionResult result = target.GetImage(2);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(FileResult));
+            Assert.AreEqual(prod.ImageMimeType, ((FileResult)result).ContentType);
+        }
 
         [TestMethod]
-        public void TestMethod1()
+        public void Cannot_Retrieve_Image_Data_For_Invalid_ID()
         {
-            //
-            // TODO: Add test logic here
-            //
+            // Arrange - create the mock repository
+            Mock<IProductRepository> mock = new Mock<IProductRepository>();
+            mock.Setup(m => m.Products).Returns(new Product[] {
+                new Product {ProductID = 1, Name = "P1"},
+                new Product {ProductID = 2, Name = "P2"}
+            }.AsQueryable());
+
+            // Arrange - create the controller
+            ProductController target = new ProductController(mock.Object);
+
+            // Act - call the GetImage method
+            ActionResult result = target.GetImage(100);
+
+            // Assert
+            Assert.IsNull(result);
         }
     }
 }
