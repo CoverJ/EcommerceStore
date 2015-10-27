@@ -20,23 +20,42 @@ namespace SportsStore.WebUI.Controllers
 
         public ViewResult List(string category, int page = 1)
         {
-            ProductsListViewModel model = new ProductsListViewModel
+            ProductsListViewModel model;
+            PagingInfo pageInfo = new PagingInfo
             {
-                Products = repository.Products
-                .Where(p => p.Category == null || p.Category == category)
-                .OrderBy(p => p.ProductID)
-                .Skip((page - 1) * PageSize)
-                .Take(PageSize),
-                PagingInfo = new PagingInfo
-                {
-                    CurrentPage = page,
-                    ItemsPerPage = PageSize,
-                    TotalItems = category == null ?
-                        repository.Products.Count() :
-                        repository.Products.Where(e => e.Category == category).Count()
-                },
-                CurrentCategory = category
+                CurrentPage = page,
+                ItemsPerPage = PageSize,
+                TotalItems = category == null ?
+                    repository.Products.Count() :
+                    repository.Products.Where(e => e.Category == category).Count()
             };
+            
+            if (category == null)
+            {
+                model = new ProductsListViewModel()
+                {
+                    Products = repository.Products
+                    .OrderBy(p => p.ProductID)
+                    .Skip((page - 1) * PageSize)
+                    .Take(PageSize),
+
+                    PagingInfo = pageInfo,
+                    CurrentCategory = category
+                };
+            }
+            else
+            {
+                model = new ProductsListViewModel
+                    {
+                        Products = repository.Products
+                        .Where(p => p.Category == null || p.Category == category)
+                        .OrderBy(p => p.ProductID)
+                        .Skip((page - 1) * PageSize)
+                        .Take(PageSize),
+                        PagingInfo = pageInfo,
+                        CurrentCategory = category
+                    }; 
+            }
             return View(model);
         }
 
